@@ -61,7 +61,6 @@ export const GlobalStyles = createGlobalStyle`
         text-decoration: none;
         color: inherit;
     }
-
     html, body {
         margin: 0;
         padding: 0;
