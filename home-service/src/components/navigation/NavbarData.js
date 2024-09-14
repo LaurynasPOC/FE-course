@@ -1,18 +1,18 @@
 export const NavbarData = [
   {
-    to: "/#home",
+    to: "/",
     text: "Home",
   },
   {
-    to: "/#about",
+    to: "/about",
     text: "About",
   },
   {
-    to: "/#team",
+    to: "/team",
     text: "Team",
   },
   {
-    to: "/#contacts",
+    to: "/contacts",
     text: "Contacts",
   },
 ];
