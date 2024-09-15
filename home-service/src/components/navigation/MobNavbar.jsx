@@ -2,6 +2,45 @@ import { Link } from "../links/Link";
 import styled from "styled-components";
 import { NavbarData } from "./NavbarData";
 import { AiFillGitlab } from "react-icons/ai";
+import Button from "../Button";
+import { useNavigate } from "react-router-dom";
+
+const MobNavbar = () => {
+  const navigate = useNavigate();
+  return (
+    <NavbarController>
+      <Link to="/">
+        <AiFillGitlab size={30} />
+      </Link>
+      <HamburgerMenu>
+        <input
+          type="checkbox"
+          id="menu-toggle"
+          aria-label="Toggle navigation menu"
+        />
+        <label htmlFor="menu-toggle">
+          <div></div>
+        </label>
+        <ul>
+          {NavbarData.map(({ to, text }, index) => (
+            <li key={index}>
+              <Link color={"var(--purple)"} to={to}>
+                {text}
+              </Link>
+            </li>
+          ))}
+          <li>
+            <Button $margin="20px 0 0" onClick={() => navigate("/login")}>
+              Login/Register
+            </Button>
+          </li>
+        </ul>
+      </HamburgerMenu>
+    </NavbarController>
+  );
+};
+
+export default MobNavbar;
 
 const NavbarController = styled.header`
   display: flex;
@@ -80,7 +119,7 @@ const HamburgerMenu = styled.div`
     top: 50px;
     right: 0;
     background-color: var(--white-2);
-    width: 200px;
+    width: 250px;
     padding: 20px;
     transform: translateX(115%);
     transition: transform 0.3s ease;
@@ -96,41 +135,3 @@ const HamburgerMenu = styled.div`
     transform: translateX(12%);
   }
 `;
-
-const MobNavbar = () => {
-  return (
-    <NavbarController>
-      <Link to="/">
-        <AiFillGitlab size={30} />
-      </Link>
-      <HamburgerMenu>
-        <input
-          type="checkbox"
-          id="menu-toggle"
-          aria-label="Toggle navigation menu"
-        />
-        <label htmlFor="menu-toggle">
-          <div></div>
-        </label>
-        <ul>
-          {NavbarData.map(({ to, text }, index) => (
-            <li key={index}>
-              <Link color={"var(--purple)"} to={to}>
-                {text}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <ul>
-          <li>
-            <Link onClick={handleLinkBg} button to="/login">
-              Login
-            </Link>
-          </li>
-        </ul>
-      </HamburgerMenu>
-    </NavbarController>
-  );
-};
-
-export default MobNavbar;

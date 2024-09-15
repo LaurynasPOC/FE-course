@@ -3,10 +3,11 @@ import { Input } from "../../components/Input";
 import styled from "styled-components";
 import Button from "../../components/Button";
 import { IoSearch } from "react-icons/io5";
+import { Card } from "./Card";
 
 export const Hero = () => {
   return (
-    <StyledHero>
+    <StyledHero $bgcolor="linear-gradient(to top, #ffc75f 0%, #f7f4fd 15%);">
       <Container>
         <h1>
           Find Home <span>Service/Repair</span> Near You
@@ -24,6 +25,7 @@ export const Hero = () => {
             <IoSearch />
           </Button>
         </form>
+        <Card />
       </Container>
     </StyledHero>
   );
@@ -45,7 +47,7 @@ const StyledHero = styled(SectionWrapper)`
     color: var(--white-2);
     vertical-align: middle;
     margin-bottom: 3px;
-    transition: none; 
-    pointer-events: none; 
+    transition: none;
+    pointer-events: none;
   }
 `;

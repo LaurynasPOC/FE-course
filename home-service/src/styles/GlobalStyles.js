@@ -42,7 +42,7 @@ const reset = `
 export const GlobalStyles = createGlobalStyle`
     ${reset}
     :root {
-        --purple: #8056eb;
+        --purple: #845EC2;
         --blue: #5b24e7;
         --white-1: #f1f1f1;
         --white-2: #f2eefd;
@@ -50,7 +50,12 @@ export const GlobalStyles = createGlobalStyle`
         --light-grey: #ccc;
         --grey: #a8a8a8;
         --black: #323232;
-    }
+        
+        --light-green:#00C0A3;
+        --yellow: #ffc75f;
+        --rose: #ff6f91;
+        --orange: #ff9671;
+        }
 
     *, *::after, *::before {
         box-sizing: border-box;

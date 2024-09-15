@@ -5,8 +5,88 @@ import { Link } from "../links/Link";
 import MobNavbar from "./MobNavbar";
 import { useQuery } from "../../styles/Breakpoints";
 import { AiFillGitlab } from "react-icons/ai";
+import Button from "../Button";
+import { useNavigate } from "react-router-dom";
 
-export const NavbarStyles = styled.header`
+const Navbar = () => {
+  const { isDesktop } = useQuery();
+  const [indicatorStyle, setIndicatorStyle] = useState({
+    left: "0px",
+    width: "0px",
+  });
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const navigate = useNavigate();
+
+  useLayoutEffect(() => {
+    const activeLink = document.querySelector("nav ul a:first-child");
+
+    if (activeLink && isFirstLoad) {
+      activeLink.classList.add("first-load");
+      setIndicatorStyle({
+        left: `${activeLink.offsetLeft}px`,
+        width: `${activeLink.offsetWidth}px`,
+      });
+    }
+
+    return () => {
+      if (activeLink) {
+        activeLink.classList.remove("first-load");
+      }
+    };
+  }, [isFirstLoad]);
+
+  const handleLinkBg = (e) => {
+    const target = e.currentTarget;
+    navigate("/login");
+    const firstUl = document.querySelector("nav ul:first-of-type");
+    if (firstUl.contains(target)) {
+      setIsFirstLoad(false);
+      setIndicatorStyle({
+        left: `${target.offsetLeft}px`,
+        width: `${target.offsetWidth}px`,
+      });
+    } else {
+      setIndicatorStyle({
+        left: "0px",
+        width: "0px",
+      });
+    }
+  };
+
+  return !isDesktop ? (
+    <NavbarStyles>
+      <div>
+        <Link onClick={handleLinkBg} to="/">
+          <AiFillGitlab />
+        </Link>
+        IpsumText
+      </div>
+      <nav>
+        <ul>
+          <div id="indicator" style={indicatorStyle} />
+          {NavbarData.map(({ to, text }, index) => (
+            <li key={index}>
+              <Link onClick={handleLinkBg} to={to}>
+                {text}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <ul>
+          <li>
+            <Button onClick={handleLinkBg}>Login/Register</Button>
+          </li>
+        </ul>
+      </nav>
+    </NavbarStyles>
+  ) : (
+    <MobNavbar />
+  );
+};
+
+export default Navbar;
+
+const NavbarStyles = styled.header`
   position: fixed;
   top: 0;
   width: 100%;
@@ -72,82 +152,3 @@ export const NavbarStyles = styled.header`
     }
   }
 `;
-
-const Navbar = () => {
-  const { isDesktop } = useQuery();
-  const [indicatorStyle, setIndicatorStyle] = useState({
-    left: "0px",
-    width: "0px",
-  });
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
-
-  useLayoutEffect(() => {
-    const activeLink = document.querySelector("nav ul a:first-child");
-
-    if (activeLink && isFirstLoad) {
-      activeLink.classList.add("first-load");
-      setIndicatorStyle({
-        left: `${activeLink.offsetLeft}px`,
-        width: `${activeLink.offsetWidth}px`,
-      });
-    }
-
-    return () => {
-      if (activeLink) {
-        activeLink.classList.remove("first-load");
-      }
-    };
-  }, [isFirstLoad]);
-
-  const handleLinkBg = (e) => {
-    const target = e.currentTarget;
-
-    const firstUl = document.querySelector("nav ul:first-of-type");
-    if (firstUl.contains(target)) {
-      setIsFirstLoad(false);
-      setIndicatorStyle({
-        left: `${target.offsetLeft}px`,
-        width: `${target.offsetWidth}px`,
-      });
-    } else {
-      setIndicatorStyle({
-        left: "0px",
-        width: "0px",
-      });
-    }
-  };
-
-  return !isDesktop ? (
-    <NavbarStyles>
-      <div>
-        <Link onClick={handleLinkBg} to="/">
-          <AiFillGitlab />
-        </Link>
-        IpsumText
-      </div>
-      <nav>
-        <ul>
-          <div id="indicator" style={indicatorStyle} />
-          {NavbarData.map(({ to, text }, index) => (
-            <li key={index}>
-              <Link onClick={handleLinkBg} to={to}>
-                {text}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <ul>
-          <li>
-            <Link onClick={handleLinkBg} button to="/login">
-              Login
-            </Link>
-          </li>
-        </ul>
-      </nav>
-    </NavbarStyles>
-  ) : (
-    <MobNavbar />
-  );
-};
-
-export default Navbar;

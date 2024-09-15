@@ -31,6 +31,7 @@ const BaseButton = styled.button`
 
 const PrimaryButton = styled(BaseButton)`
   background: var(--purple);
+  color: var(--white-1);
 
   :hover {
     background-color: var(--blue);
@@ -55,7 +56,7 @@ const DarkButton = styled(BaseButton)`
   }
 `;
 
-const Button = ({ variant = "base", children, ...rest }) => {
+const Button = ({ variant = "primary", children, ...rest }) => {
   if (variant === "primary")
     return <PrimaryButton {...rest}>{children}</PrimaryButton>;
 
@@ -63,8 +64,6 @@ const Button = ({ variant = "base", children, ...rest }) => {
     return <SecondaryButton {...rest}>{children}</SecondaryButton>;
 
   if (variant === "dark") return <DarkButton {...rest}>{children}</DarkButton>;
-
-  return <BaseButton {...rest}>{children}</BaseButton>;
 };
 
 export default Button;
