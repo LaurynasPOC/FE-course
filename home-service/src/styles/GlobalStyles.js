@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { desktop } from "./Breakpoints";
+import { desktop, mobile } from "./Breakpoints";
 
 const reset = `
     html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, 
@@ -43,12 +43,15 @@ export const GlobalStyles = createGlobalStyle`
     ${reset}
     :root {
         --purple: #845EC2;
+        --purple-shade: rgba(132, 94, 194, 0.1);
+
         --blue: #5b24e7;
         --white-1: #f1f1f1;
         --white-2: #f2eefd;
         --white-3: #f7f4fd;
         --light-grey: #ccc;
         --grey: #a8a8a8;
+        --dark-grey: #7a7a7a;
         --black: #323232;
         
         --light-green:#00C0A3;
@@ -104,7 +107,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     h5 {
-        font-size: 24px;
+        font-size: 18px;
     }
 
     p {
@@ -125,11 +128,25 @@ export const GlobalStyles = createGlobalStyle`
         h3 {
             font-size: 34px;
         }
-        h5 {
-            font-size: 20px;
-        }
         p {
             font-size: 16px;
+        }
+    }
+    @media ${mobile} {
+        h1 {
+            font-size: 32px;
+        }
+        h2 {
+            font-size: 28px;
+        }
+        h3 {
+            font-size: 24px;
+        }
+        h5 {
+            font-size: 16px;
+        }
+        p {
+            font-size: 14px;
         }
     }
 `;

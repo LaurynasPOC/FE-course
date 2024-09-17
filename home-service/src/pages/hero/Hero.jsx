@@ -7,7 +7,7 @@ import { Card } from "./Card";
 
 export const Hero = () => {
   return (
-    <StyledHero $bgcolor="linear-gradient(to top, #ffc75f 0%, #f7f4fd 15%);">
+    <StyledHero $bgcolor="linear-gradient(to top, #ffc75f -20%, #f7f4fd 15%);">
       <Container>
         <h1>
           Find Home <span>Service/Repair</span> Near You
